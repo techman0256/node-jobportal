@@ -1,2 +1,3 @@
 // app.js file created
 // adminRoutes /admin and / endpoints created
+// sign up model created using bcrypt and mongoose for 

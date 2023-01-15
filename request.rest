@@ -1,0 +1,35 @@
+GET http://localhost:5000/auth/login
+###
+
+POST http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "something@nothing.com",
+    "password": "password"
+}
+###
+POST  http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "bakwas@bekaar.com",
+    "password": "1234password"
+} 
+###
+POST  http://localhost:5000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "kamkaro@kamaao.com",
+    "password": "$$$$paisahipaisa"
+}
+### 
+POST http://localhost:5000/auth/sign-in
+Content-Type: application/json
+
+{
+    "email": "bakwas@bekaar.com",
+    "password": "1234password"
+}
+###
