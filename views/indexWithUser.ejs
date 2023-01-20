@@ -55,7 +55,7 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="/">Home</a></li>
+                                            <li><a href="/">Home with Logged User</a></li>
                                             <li><a href="job_listing.html">Find a Jobs </a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="#">Page</a>
@@ -74,13 +74,12 @@
                                 </div>          
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <% if (name == null) { %>
-                                        <a href="/auth/sign-up" class="btn head-btn1">Register</a>
-                                        <a href="/auth/sign-in" class="btn head-btn2">Login</a>
-                                    <%} else { %>
+                                    <!-- <% if (name == null) { %> -->
+                                        <!-- <a href="/auth/sign-up" class="btn head-btn1">Register</a> -->
+                                        <!-- <a href="/auth/sign-in" class="btn head-btn2">Login</a> -->
+                                    <!-- <%} else { %> -->
                                         <button class="btn head-btn2"><%= name %></button>
-                                        <a href="/my/<%= userId %>/dashboard"></a>
-                                    <% } %>
+                                    <!-- <% } %> -->
                                     
                                     
 

@@ -8,7 +8,6 @@ const auth = require('../controllers/auth');
 /* User authentication process ******************************************************** */ 
 //GET Method for sign-in page
 router.get('/sign-in',(req, res, next) => {
-    // res.send('signing up');
     res.render('sign-in');
 });
 
@@ -17,7 +16,7 @@ router.get('/sign-up', (req, res, next) => {
     res.render('sign-up');
 })
 
-//POST Method for sign-up
+//POST Method for sign-in
 router.post('/sign-in', auth.postSignIn);
 
 //POST method that registers new uses in the database

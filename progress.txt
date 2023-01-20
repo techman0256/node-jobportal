@@ -1,3 +1,10 @@
 // app.js file created
 // adminRoutes /admin and / endpoints created
 // sign up model created using bcrypt and mongoose for 
+
+
+
+
+Potential Bugs
+-Login/sign-up wrong password prompt
+-Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
