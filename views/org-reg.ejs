@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Login Form | CodingLab </title>--->
+    <link rel="stylesheet" href="/css/sign-in.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="container">
+      <form action="/crtprofile/<%= userId %>" method="POST">
+        <p><%= userId %></p>
+        <div class="title">Registration</div>
+        <div class="input-box underline">
+          <input type="text" name="name" placeholder="Enter Your Name" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-box">
+          <input type="email" name="email" placeholder="Enter Your email" required>
+          <div class="underline"></div>
+        </div>
+		<div class="input-box">
+			<input type="text" name="contact_no" placeholder="Enter Your No." required>
+			<div class="underline"></div>
+		</div>
+		<div class="input-box">
+			<input type="number" name="age" placeholder="Enter Your age" required>
+			<div class="underline"></div>
+		</div>
+		<div class="input-box">
+			<label for="gender">Gender</label>
+			<select id="gender" name="gender">
+				<option value="M">Male</option>
+				<option value="F">Female</option>
+			</select>
+			<div class="underline"></div>
+		</div>
+
+        <div class="input-box button">
+          <input type="submit" name="" value="Submit">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

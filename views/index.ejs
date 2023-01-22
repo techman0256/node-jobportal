@@ -74,25 +74,13 @@
                                 </div>          
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <% if (name == null) { %>
+                                    <!-- <% if (true) { %> -->
                                         <a href="/auth/sign-up" class="btn head-btn1">Register</a>
                                         <a href="/auth/sign-in" class="btn head-btn2">Login</a>
-                                    <%} else { %>
+                                    <!-- <%} else { %> -->
                                         <button class="btn head-btn2"><%= name %></button>
                                         <a href="/my/<%= userId %>/dashboard"></a>
-                                    <% } %>
-                                    
-                                    
-
-                                    <!-- <ul>
-                                        <li class="user"> </li>
-                                        <li>
-                                            <form action="/logout" method="post">
-                                                <button class="logout" type="submit">Sign out</button>
-                                            </form>
-                                        </li>
-                                    </ul> -->
-
+                                    <!-- <% } %> -->
                                 </div>
                             </div>
                         </div>
@@ -104,6 +92,10 @@
                 </div>
            </div>
        </div>
+       <style>
+
+
+       </style>
         <!-- Header End -->
     </header>
     <main>

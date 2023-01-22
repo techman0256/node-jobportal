@@ -8,7 +8,7 @@ const { ObjectID, ObjectId } = require('bson');
 
 exports.postSignIn = (req, res, next) => {
     try {
-        // console.log(req.body);
+        console.log(req.body);
         User.findOne({email: req.body.email}, (err, result) => {
             if (err) {
                 console.log(err);
@@ -21,7 +21,12 @@ exports.postSignIn = (req, res, next) => {
                         console.log(result._id);
                         const userId = result._id.toString();
                         console.log(typeof(userId));
-                        res.redirect('/my/' + userId);
+                        if (req.query.orgs == 'true') {
+                            res.redirect('/work/dashboard/'+ userId);
+                        }
+                        else {
+                            res.redirect('/my/' + userId);
+                        }
                         // res.send({username: result.email})
                         // res.render('index', {email: req.body.email})   
                         // const user = {email: req.body.email};
@@ -34,7 +39,7 @@ exports.postSignIn = (req, res, next) => {
                         res.redirect('/auth/sign-in');
                         console.log(false);
                     }
-                    next();
+                    // next();
                 });
                 
             }
@@ -49,24 +54,40 @@ exports.postSignIn = (req, res, next) => {
 exports.postSignup = (req, res) => {
     // get the data form the sign up form and encrypt using bycrypt and store it in the database
     try {
-
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
+        console.log(typeof(req.query.orgs));
         
-        const crtUser =  new User({email: req.body.email, crtPwd: hash});
+        var usrType = 'student';
+        if (req.query.orgs == 'true') {
+            console.log('hi');
+            usrType = 'organization';   
+        }
+        console.log(true);
+        const crtUser =  new User({email: req.body.email, crtPwd: hash, usrType: usrType});
+        
+        console.log(crtUser._id);
         crtUser.save((err) => {
             if (err) {
                 console.log(err);   
             }
         });
-
-        console.log(crtUser._id);
+        console.log('profile created successfully');
         const userId = crtUser._id.toString();
-        console.log(userId);
+        console.log(crtUser);
         res.status(201);
-        res.redirect('/crtprofile/'+userId);
+        if (req.query.orgs == 'true') {
+            console.log('redirected in work');   
+            res.redirect('/work/getcrtDashboard/'+userId);
+        }
+        else {
+            res.redirect('/crtprofile/'+userId);       
+        }
+        
     }
     catch {
         res.status(500).send();
     }
 }
+
+// exports.postOrfSignup = ()

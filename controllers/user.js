@@ -25,11 +25,49 @@ exports.postProfile = (req, res, next) => {
     });
 }
 
-exports.editProfile = (req, res) => {
+
+// It should render a page with students details for editing them
+exports.getEditProfile = (req, res) => {
     const userId = req.params.userId;
-    User.updateOne({})
+    if (req.query.edit == true) {
+        userData.findOne({userId: userId}, (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(result);
+                res.send({result})
+    
+                // Need a ejs template to render crtProfile with filled data...
+            }
+        })
+    }
+    // User.updateOne({})
     // const updatedProfile = 
 
+}
+
+exports.putEditProfile = (req, res) => {
+    console.log('putting editing profile');
+    console.log(req.body.name);
+    userData.updateOne({userId:new  mongodb.ObjectId(req.params.userId)},{
+        $set: {
+            name: req.body.name,
+            contact_no: req.body.contact_no,
+            age: req.body.age,
+            gender: req.body.gender
+        }
+    },(err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(result);
+            res.send({result})
+
+            // Need a ejs template to render dashboard...
+        }
+    })
 }
 
 exports.dashboard = (req, res) => {
@@ -41,6 +79,8 @@ exports.dashboard = (req, res) => {
         else {
             console.log(result);
             res.send({result})
+
+            // Need a ejs template to render dashboard...
         }
     })
 }

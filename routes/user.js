@@ -21,7 +21,7 @@ router.get('/my/:userId', (req, res, next) => {
             // By now we've got fetch the students details in this results object
             
             // res.send(results.name);
-            res.render('index', {name: results.name,userId: results.userId});
+            res.render('index');
 
         }
     })
@@ -30,18 +30,19 @@ router.get('/my/:userId', (req, res, next) => {
 router.get('/', (req, res, next) => {
     console.log('simple index loading');
     res.render('index', {name: null});
-    next();
+    // next();
 });
 
 
-// router.post('/auth/sign-in', auth.postSignIn)
+
 
 router.get('/crtprofile/:userId', user.getProfile);
 router.post('/crtprofile/:userId', user.postProfile);
 
-router.get('/my/:userId/dashboard', user.dashboard)
+router.get('/my/:userId/dashboard', user.dashboard);
 
+router.get('/crtprofile/:userId', user.getEditProfile)
 
-router.put('/crtprofile/:userId', user.editProfile)
+router.put('/crtprofile/:userId', user.putEditProfile)
 
 module.exports = router;

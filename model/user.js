@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     email: String,
     crtPwd: String,
+    usrType: {
+        type: String,
+        enum: ['admin', 'student', 'organization']
+    } 
     // cfrmPwd: String
 })
 

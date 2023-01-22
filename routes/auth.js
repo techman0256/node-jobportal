@@ -24,12 +24,21 @@ router.post('/sign-up', auth.postSignup);
 
 
 /* company authentication code ******************************************************** */
-router.get('/work-login',(req, res, next) => {
-    res.send('work login')
+
+router.get('/work-sign-up',(req, res) => {
+    // res.send('organization signing up');
+    res.render('work-sign-up');
 });
 
+router.get('/work-sign-in',(req, res) => {
+    res.render('work-sign-in'); 
+});
 
-// router.post
+// @post
+
+router.post('/work-sign-up', auth.postSignup);
+
+router.post('/work-sign-in', auth.postSignIn);
 
 
 module.exports = router;
