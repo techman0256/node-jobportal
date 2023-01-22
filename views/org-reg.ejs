@@ -10,32 +10,32 @@
   </head>
   <body>
     <div class="container">
-      <form action="/crtprofile/<%= userId %>" method="POST">
-        <p><%= userId %></p>
-        <div class="title">Registration</div>
+      <form action="/work/crtDashboard/<%= userId %>" method="POST">
+        <!-- <p><%= userId %></p> -->
+        <div class="title">Organization Dashboard</div>
         <div class="input-box underline">
           <input type="text" name="name" placeholder="Enter Your Name" required>
           <div class="underline"></div>
         </div>
         <div class="input-box">
-          <input type="email" name="email" placeholder="Enter Your email" required>
+          <input type="url" name="website" placeholder="Enter website url" required>
           <div class="underline"></div>
         </div>
 		<div class="input-box">
-			<input type="text" name="contact_no" placeholder="Enter Your No." required>
+			<input type="text" name="description" placeholder="Enter what you do" required>
 			<div class="underline"></div>
 		</div>
 		<div class="input-box">
-			<input type="number" name="age" placeholder="Enter Your age" required>
+			<input type="text" name="positions" placeholder="Enter offering positions" required>
 			<div class="underline"></div>
 		</div>
 		<div class="input-box">
-			<label for="gender">Gender</label>
+			<!-- <label for="gender">Gender</label>
 			<select id="gender" name="gender">
 				<option value="M">Male</option>
 				<option value="F">Female</option>
-			</select>
-			<div class="underline"></div>
+			</select> -->
+			<!-- <div class="underline"></div> -->
 		</div>
 
         <div class="input-box button">

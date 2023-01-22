@@ -15,18 +15,22 @@ exports.getDashboard = (req, res) => {
 }
 
 exports.getCrtDashboard = (req, res) => {
-    res.send('fill this form to create a dashboard');
+    // res.send('fill this form to create a dashboard');
     // render a form to company dashboard details
+    console.log(req.params.companyId);
+    res.render('org-reg', {userId: req.params.companyId});
 }
 
 exports.postDashboard = (req, res) => {
     const companyId = req.params.companyId;
+    // console.log(req.body.position);
+    console.log(req.body);
     const crtProfile = new Company({
-        companyName: req.body.companyId,
-        userId: new mongodb.ObjectId(req.params.companyId),
-        officialWebsite: req.body.officialWebsite,
+        companyName: req.body.name,
+        companyId: new mongodb.ObjectId(req.params.companyId),
+        officialWebsite: req.body.website,
         description: req.body.description,
-        postition: req.body.postition
+        position: req.body.position,
     })
 
     crtProfile.save((err) => {
@@ -34,20 +38,24 @@ exports.postDashboard = (req, res) => {
             console.log(err);
         }
         else {
+            console.log(crtProfile);
             console.log('company dashboard created');
+            // res.send(crtProfile)
+            res.redirect('/work/dashboard/'+companyId);
         }   
+
     })
 }
 
 
 exports.putEditDashboard = (req, res) => {
-    company.updateOne({_id: new mongodb.ObjectId(companyId)},{
+    Company.updateOne({companyId: new mongodb.ObjectId(req.params.companyId)},{
         $set: {
             companyName: req.body.companyName,
             // userId: new mongodb.ObjectId(req.params.companyId),
             officialWebsite: req.body.officialWebsite,
             description: req.body.description,
-            postition: req.body.postition, 
+            position: req.body.position, 
         }
     } ,(err, results) => {
         res.send('profile updated');

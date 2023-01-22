@@ -5,7 +5,7 @@ const validator = require('validator')
 
 const companySchema = mongoose.Schema({
     companyName: String,
-    userId: {
+    companyId: {
         type: mongoose.Schema.Types.ObjectId,
         // type: String,
         ref: 'users',
@@ -13,7 +13,7 @@ const companySchema = mongoose.Schema({
     },
     officialWebsite: String,
     description: String,
-    postition: String,
+    position: String
 
 })
 
