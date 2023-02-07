@@ -110,10 +110,12 @@ exports.putEditProfile = (req, res) => {
 
 exports.getCompany = (req, res) => {
     const userId = req.params.userId;
+    
     userData.findOne({userId: new mongodb.ObjectId(userId)}, (err, result) => {
         console.log(result);
-        Company.find({reqcpi: { $lt : result.cpi} }, (req, res) => {
-            console.log(res);
+        Company.find({reqcpi: { $lt : result.cpi} }, (err, companies) => {
+            console.log(companies[0]);
+            res.render('showCompany', {name: result.name, userId: userId, jobs: companies})
         })
     })
 
