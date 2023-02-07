@@ -15,6 +15,7 @@ const validator = require('validator')
 
 const userRegSchema = mongoose.Schema({
     name: String,
+    email: String,
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         // type: String,
@@ -23,7 +24,10 @@ const userRegSchema = mongoose.Schema({
     },
     contact_no: String,
     age: Number,    
-    gender: String
+    gender: String,
+    cpi: Number,
+    batch: String,
+    techstack : String
 })
 
 

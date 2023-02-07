@@ -11,10 +11,13 @@ const companySchema = mongoose.Schema({
         ref: 'users',
         required: true
     },
+    email: String,
     officialWebsite: String,
     description: String,
-    position: String
-
+    position: String,
+    reqcpi: Number,
+    ctc: Number,
+    minage: Number
 })
 
 

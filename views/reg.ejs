@@ -9,40 +9,88 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    <% if (edit != 'true') { %>
+      <div class="container">
+        <form action="/crtprofile/<%= userId %>" method="POST">
+          <!-- <p><%= userId %></p> -->
+          <div class="title">Registration</div>
+          <div class="input-box underline">
+            <input type="text" name="name" placeholder="Enter Your Name" required>
+            <div class="underline"></div>
+          </div>
+          <div class="input-box">
+            <input type="text" name="contact_no" placeholder="Enter Your No." required>
+            <div class="underline"></div>
+          </div>
+          <div class="input-box">
+            <input type="number" name="age" placeholder="Enter Your age" required>
+            <div class="underline"></div>
+          </div>
+          <div class="input-box">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+            <div class="underline"></div>
+          </div>
+          <div class="input-box">
+            <input type="number" step="any" name="cpi" placeholder="Enter Your CPI" required>
+            <div class="underline"></div>
+          </div>
+          <div class="input-box">
+            <input type="text" name="techstack" placeholder="Enter Your TechStack" required>
+            <div class="underline"></div>
+          </div>
+  
+          <div class="input-box button">
+            <input type="submit" name="" value="Submit">
+          </div>
+        </form>
+      </div>
+   <%} 
+   else { %>
     <div class="container">
-      <form action="/crtprofile/<%= userId %>" method="POST">
-        <p><%= userId %></p>
+      <form action="/my/edtprofile/<%= userId %>" method="POST">
+        
         <div class="title">Registration</div>
         <div class="input-box underline">
-          <input type="text" name="name" placeholder="Enter Your Name" required>
+          <input type="text" name="name" placeholder="Enter Your Name" value="<%= name %>" required>
           <div class="underline"></div>
         </div>
         <div class="input-box">
-          <input type="email" name="email" placeholder="Enter Your email" required>
+          <input type="text" name="contact_no" placeholder="Enter Your No." value="<%= number %>" required>
           <div class="underline"></div>
         </div>
-		<div class="input-box">
-			<input type="text" name="contact_no" placeholder="Enter Your No." required>
-			<div class="underline"></div>
-		</div>
-		<div class="input-box">
-			<input type="number" name="age" placeholder="Enter Your age" required>
-			<div class="underline"></div>
-		</div>
-		<div class="input-box">
-			<label for="gender">Gender</label>
-			<select id="gender" name="gender">
-				<option value="M">Male</option>
-				<option value="F">Female</option>
-			</select>
-			<div class="underline"></div>
-		</div>
+        <div class="input-box">
+          <input type="number" name="age" placeholder="Enter Your age" value="<%= age %>" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-box">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select> 
+          <div class="underline"></div>
+        </div>
+        <div class="input-box">
+          <input type="number" step="any" name="cpi" placeholder="Enter Your CPI" value="<%= cpi %>" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-box">
+          <input type="text" name="techstack" placeholder="Enter Your TechStack" value="<%= techstack %>" required>
+          <div class="underline"></div>
+        </div>
 
         <div class="input-box button">
           <input type="submit" name="" value="Submit">
         </div>
       </form>
     </div>
+   <% } %>
+    
+    
   </body>
 </html>
 

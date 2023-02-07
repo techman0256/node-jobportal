@@ -6,5 +6,20 @@
 
 
 Potential Bugs
+-reconfigure home page with company/student option
+-controllers and front-end page for all requests
 -Login/sign-up wrong password prompt
+-Rendering /my/userId routes properly (CSS Not loading)
+ BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
 -Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+
+
+next possible features
+-using validators
+-using indeed job api
+-sending email (using nodemailer)
+-sign in with google feature (using passport js)
+-convert it into social media app
+-file Upload and download.
+-payment integration
+-Chat/video calling option

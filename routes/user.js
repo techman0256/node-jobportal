@@ -9,7 +9,7 @@ const mongodb = require('mongodb');
 
 
 router.get('/my/:userId', (req, res, next) => {
-    console.log('params index loading');
+    // console.log('params index loading');
     
     userData.findOne({userId: mongodb.ObjectId(req.params.userId)}, (err, results) => {
         if (err) {
@@ -21,18 +21,31 @@ router.get('/my/:userId', (req, res, next) => {
             // By now we've got fetch the students details in this results object
             
             // res.send(results.name);
-            res.render('index');
+            res.render('index', {
+                name: results.name, 
+                email: results.email,
+                number: results.contact_no,
+                age: results.age, 
+                gender: results.gender,
+                cpi: results.cpi,
+                techstack: results.techstack,
+                userId: req.params.userId
+                
+            });
 
         }
     })
 });
 
-router.get('/', (req, res, next) => {
-    console.log('simple index loading');
+router.get('/', (req, res) => {
+    res.render('landing');
+
+});
+
+router.get('/student', (req, res) => {
     res.render('index', {name: null});
     // next();
 });
-
 
 
 
@@ -40,9 +53,10 @@ router.get('/crtprofile/:userId', user.getProfile);
 router.post('/crtprofile/:userId', user.postProfile);
 
 router.get('/my/:userId/dashboard', user.dashboard);
+router.get('/my/:userId/company', user.getCompany)
 
-router.get('/crtprofile/:userId', user.getEditProfile)
+router.get('/my/crtprofile/:userId', user.getEditProfile);
 
-router.put('/crtprofile/:userId', user.putEditProfile)
+router.post('/my/edtprofile/:userId', user.putEditProfile);
 
 module.exports = router;

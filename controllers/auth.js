@@ -8,7 +8,6 @@ const { ObjectID, ObjectId } = require('bson');
 
 exports.postSignIn = (req, res, next) => {
     try {
-        console.log(req.body);
         User.findOne({email: req.body.email}, (err, result) => {
             if (err) {
                 console.log(err);
@@ -78,7 +77,7 @@ exports.postSignup = (req, res) => {
         res.status(201);
         if (req.query.orgs == 'true') {
             console.log('redirected in work');   
-            res.redirect('/work/getcrtDashboard/'+userId);
+            res.redirect('/work/crtDashboard/'+userId);
         }
         else {
             res.redirect('/crtprofile/'+userId);       
