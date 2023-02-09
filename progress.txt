@@ -6,6 +6,7 @@
 
 
 Potential Bugs
+-job listing for user front-end improvement
 -reconfigure home page with company/student option
 -controllers and front-end page for all requests
 -Login/sign-up wrong password prompt

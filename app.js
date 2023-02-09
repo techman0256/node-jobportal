@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+
+const PORT = process.env.PORT || 3030;
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongodb = require('mongodb');
@@ -44,7 +47,7 @@ app.use((req, res, next) => {
 
 // database.mongoConnect(() => {
 
-    app.listen(5000, () => {
+    app.listen(PORT, () => {
         console.log('Job Portal app is running');
     })
         
