@@ -7,3 +7,4 @@ if (str1 == 'hello world') {
     //strings are not equal.
     console.log(false);
 }
+

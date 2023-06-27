@@ -4,6 +4,21 @@ const userData = require('../model/userData');
 const Company = require('../model/organization')
 const mongodb = require('mongodb');
 
+exports.getsearchOnGoogle = (req, res) => {
+    const userId = req.params.userId;
+    console.log(userId);
+    
+    userData.findOne({userId: new mongodb.ObjectId(userId)}, (err, result) => {
+        if (!err) {
+            res.render('searchOnGoogle', {userId: req.params.userId, name: result.name});
+        }
+        else {
+            res.render('searchOnGoogle', {userId: req.params.userId, name : null});
+        }
+    
+    })
+}
+
 exports.getProfile = (req, res, next) => {
     console.log(req.params);
     res.render('reg', {userId: req.params.userId, edit: 'false'});

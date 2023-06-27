@@ -1,42 +1,61 @@
 require('dotenv').config();
 
-
 const User = require('../model/user');
+
+const cookie = require('cookie');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { ObjectID, ObjectId } = require('bson');
+
+exports.authenticateToken = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if (typeof(token) == typeof(undefined)) {
+        res.redirect('/');
+    }
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err)  => {
+        if (err) {
+            res.redirect('/');
+        }
+        else {
+            next();
+        }
+    })
+}
 
 exports.postSignIn = (req, res, next) => {
     try {
         User.findOne({email: req.body.email}, (err, result) => {
             if (err) {
                 console.log(err);
+                res.redirect('/auth/sign-in');
             }
             else {
-                // console.log(result.crtPwd);
                 bcrypt.compare(req.body.password, result.crtPwd, (err, pass) => {
                    if (pass == true) {
-                        console.log(true);
-                        console.log(result._id);
+                        
                         const userId = result._id.toString();
-                        console.log(typeof(userId));
+                        const payload = {userId: userId, email: result.email, usrType: result.usrType}
+                        const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 2 })
+
+                        res.cookie("jwt", token, {
+                            expiers: new Date(Date.now() + 120000),
+                            httpsOnly: true
+                        })
+
                         if (req.query.orgs == 'true') {
                             res.redirect('/work/dashboard/'+ userId);
                         }
                         else {
+                            console.log(token);
                             res.redirect('/my/' + userId);
                         }
-                        // res.send({username: result.email})
-                        // res.render('index', {email: req.body.email})   
-                        // const user = {email: req.body.email};
-                        // const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-                        // res.json({accessToken: accessToken})
+                        
                     }
                     else {
                         // const window = new Window();
                         // prompt('Incorrect Password')
-                        res.redirect('/auth/sign-in');
-                        console.log(false);
+                        res.redirect('/auth/sign-in');                        
+                        
                     }
                     // next();
                 });
@@ -46,35 +65,48 @@ exports.postSignIn = (req, res, next) => {
 
     }
     catch {
-        res.status(500).send();
+        // res.status(500).send();
+        res.redirect('/auth/sign-in');
     }
 }
 
 exports.postSignup = (req, res) => {
     // get the data form the sign up form and encrypt using bycrypt and store it in the database
     try {
+        // encrypting user password
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
         console.log(typeof(req.query.orgs));
         
+        //assign usrType a variable to check role whether it is student of company
         var usrType = 'student';
         if (req.query.orgs == 'true') {
             console.log('hi');
             usrType = 'organization';   
         }
-        console.log(true);
+
+        // create new instance of User object and then save it
         const crtUser =  new User({email: req.body.email, crtPwd: hash, usrType: usrType});
-        
-        console.log(crtUser._id);
         crtUser.save((err) => {
             if (err) {
                 console.log(err);   
             }
         });
+
         console.log('profile created successfully');
-        const userId = crtUser._id.toString();
         console.log(crtUser);
-        res.status(201);
+        // res.status(201);
+        
+        const userId = crtUser._id.toString();
+        const payload = {userId: userId, email: crtUser.email, usrType: crtUser.usrType}
+        const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 2 })
+        // console.log(token);
+        res.cookie("jwt", token, {
+            expiers: new Date(Date.now() + 120000),
+            httpsOnly: true
+        })
+
+
         if (req.query.orgs == 'true') {
             console.log('redirected in work');   
             res.redirect('/work/crtDashboard/'+userId);
@@ -85,6 +117,7 @@ exports.postSignup = (req, res) => {
         
     }
     catch {
+        console.log('err');
         res.status(500).send();
     }
 }

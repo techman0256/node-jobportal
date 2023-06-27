@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Listing</title>
+  <style>
+    /* Styles for job list */
+    .job-list {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    .job-list .jobs {
+      flex: 1;
+      background-color: #f2f2f2; /* Background color for the left box */
+      border-right: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .job-list .jobs ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .job-list .jobs ul li {
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #333;
+      background-color: lightblue; /* Background color for each job box */
+      border: 1px solid transparent; /* Transparent border for each job box */
+      padding: 10px;
+    }
+
+    .job-list .jobs ul li:hover {
+      border-color: pink; /* Border color on hover */
+    }
+
+    /* Styles for job description */
+    .job-description {
+      flex: 2;
+      background-color: #eaeaea; /* Background color for the right box */
+      padding: 10px;
+    }
+
+    .job-description h2 {
+      margin-top: 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="job-list">
+    <!-- Left side - List of jobs -->
+    <div class="jobs">
+      <ul>
+        <li onclick="showJobDescription(1)">Job 1</li>
+        <li onclick="showJobDescription(2)">Job 2</li>
+        <li onclick="showJobDescription(3)">Job 3</li>
+        <!-- Add more job list items as needed -->
+      </ul>
+    </div>
+
+    <!-- Right side - Job description -->
+    <div class="job-description">
+      <h2>Job Description</h2>
+      <div id="jobDescription"></div>
+    </div>
+  </div>
+
+  <script>
+    // Function to show job description based on selected job
+    function showJobDescription(jobId) {
+      // Get the job description based on the job ID (from backend or predefined data)
+      // Example data for job descriptions
+      const jobDescriptions = {
+        1: "This is the description for Job 1.",
+        2: "This is the description for Job 2.",
+        3: "This is the description for Job 3."
+        // Add more job descriptions as needed
+      };
+
+      // Display the job description in the designated area
+      const jobDescriptionElement = document.getElementById("jobDescription");
+      jobDescriptionElement.textContent = jobDescriptions[jobId];
+    }
+  </script>
+</body>
+</html>
