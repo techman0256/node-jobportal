@@ -1,2 +1,0 @@
-username : jpadmin
-password : PwSbRxz9W5exaIEz
