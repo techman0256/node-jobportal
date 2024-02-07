@@ -24,5 +24,5 @@ npm install
 PORT=3000
 DB_URL= <upload_your_mongodb_url_here>
 SERP_API_KEY = <create_your_api_key_on_serpapi.com>
-DB_URL = <your_mongoDB_url>
+ACCESS_TOKEN_SECRET = 'any_secret'
 
