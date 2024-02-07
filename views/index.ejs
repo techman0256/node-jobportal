@@ -59,8 +59,8 @@
                                             <li><a href="/">Home</a></li>
                                             <% if (name != null) { %>
                                                 <li><a href="/my/crtprofile/<%= userId %>?edit=true"> Edit </a></li>
-                                                <li><a href="/my/<%= userId %>/company"> Search Company</a></li>
-                                                <li><a href="/my/<%= userId %>/search"> Search Company</a></li>
+                                                <li><a href="/my/<%= userId %>/company"> Search Company On Campus</a></li>
+                                                <li><a href="/my/<%= userId %>/search"> Find Jobs</a></li>
                                              <%} 
                                              else { %>
                                                                                                  
@@ -123,7 +123,7 @@
                            <h3>CPI : <%= cpi %></h3>
                            <h3>Age : <%= age %></h3>
                            <h3>Gender : <%= gender %></h3>
-                           <h3>TechStack <%= techstack %>:</h3>
+                           <h3>TechStack : <%= techstack %></h3>
                         <%} 
                         else { %>
                             

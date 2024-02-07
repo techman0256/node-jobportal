@@ -22,6 +22,34 @@ exports.authenticateToken = (req, res, next) => {
     })
 }
 
+exports.loginWithToken = (req, res, next) => {
+    try {
+        const token = req.cookies.jwt;
+        console.log('hello');
+        console.log(token);
+        if (typeof(token) == typeof(undefined)) {
+            res.render('landing');
+        }
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded)  => {
+            if (err) {
+                console.log('error came');
+                console.log(err);
+                res.render('landing');
+            }
+            else {
+                const userId = decoded.userId
+                console.log(userId);
+                res.redirect('/my/' + userId);
+            }
+        })
+    } catch (error) {
+        console.log(error);
+        res.render('landing');
+    }
+    
+    
+}
+
 exports.postSignIn = (req, res, next) => {
     try {
         User.findOne({email: req.body.email}, (err, result) => {
@@ -35,10 +63,10 @@ exports.postSignIn = (req, res, next) => {
                         
                         const userId = result._id.toString();
                         const payload = {userId: userId, email: result.email, usrType: result.usrType}
-                        const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 2 })
+                        const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 60 })
 
                         res.cookie("jwt", token, {
-                            expiers: new Date(Date.now() + 120000),
+                            expiers: new Date(Date.now() + 3600000),
                             httpsOnly: true
                         })
 
@@ -78,7 +106,7 @@ exports.postSignup = (req, res) => {
         const hash = bcrypt.hashSync(req.body.password, salt);
         console.log(typeof(req.query.orgs));
         
-        //assign usrType a variable to check role whether it is student of company
+        //assign usrType a variable to check role whether it is student or company
         var usrType = 'student';
         if (req.query.orgs == 'true') {
             console.log('hi');
@@ -100,7 +128,7 @@ exports.postSignup = (req, res) => {
         const userId = crtUser._id.toString();
         const payload = {userId: userId, email: crtUser.email, usrType: crtUser.usrType}
         const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 2 })
-        // console.log(token);
+        console.log(token);
         res.cookie("jwt", token, {
             expiers: new Date(Date.now() + 120000),
             httpsOnly: true

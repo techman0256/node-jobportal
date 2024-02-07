@@ -45,10 +45,9 @@ app.use((req, res) => {
     // console.log(req.body.email);
     res.status(404);
     res.render('404');
-
+    
 });
 
 app.listen(PORT, () => {
     console.log('Job Portal app is running');
 })
-        

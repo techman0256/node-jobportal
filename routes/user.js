@@ -8,6 +8,7 @@ const userData = require('../model/userData');
 const mongodb = require('mongodb');
 const https = require('https');
 
+// miscllaneous routes (outside the server)
 const getSerpApi = (req, resp, next) => { 
     console.log('in serp api');
     
@@ -57,8 +58,6 @@ const getSerpApi = (req, resp, next) => {
 }); 
     
     // resp.render('searchResults', {name: null, userId: null})
-
-
     // next();
 }
 
@@ -66,12 +65,8 @@ router.get('/desc', (req, res) => {
     res.render('searchResultsCompany');
 })
 
-router.get('/my/:userId',  auth.authenticateToken, (req, res, next) => {
-    // console.log('params index loading');
-    
-    // console.log('inside 2nd middleware');
-    // res.cookie("test", 'tera hone laga hoo... synig in the semek son like a polo pendi ocean')
-    
+router.get('/my/:userId', auth.authenticateToken, (req, res, next) => {    
+    // find basic user data from the database
     userData.findOne({userId: mongodb.ObjectId(req.params.userId)}, (err, results) => {
         if (err) {
             console.log('hello');
@@ -99,33 +94,28 @@ router.get('/my/:userId',  auth.authenticateToken, (req, res, next) => {
 
 });
 
-router.get('/', (req, res) => {
-    res.render('landing');
+// Try to login with the token
+router.get('/',  auth.loginWithToken);
 
-});
 
 router.get('/student', (req, res) => {
     res.render('index', {name: null});
     // next();
 });
 
-router.get('/crtprofile/:userId', user.getProfile);
-router.post('/crtprofile/:userId', user.postProfile);
+router.get('/crtprofile/:userId', auth.authenticateToken, user.getProfile);
+router.post('/crtprofile/:userId', auth.authenticateToken, user.postProfile);
 
-router.get('/my/:userId/dashboard', user.dashboard);
-router.get('/my/:userId/company', user.getCompany)
-router.get('/my/:userId/search', user.getsearchOnGoogle, (req, res) => {
+router.get('/my/:userId/dashboard', auth.authenticateToken, user.dashboard);
+router.get('/my/:userId/company', auth.authenticateToken, user.getCompany)
+router.get('/my/:userId/search', auth.authenticateToken, user.getsearchOnGoogle, (req, res) => {
     console.log(req.query);
 });
 
 router.get('/my/:userId/query', getSerpApi);
 
-router.get('/my/crtprofile/:userId', user.getEditProfile);
-
-router.post('/my/edtprofile/:userId', user.putEditProfile);
-
-
-
+router.get('/my/crtprofile/:userId', auth.authenticateToken, user.getEditProfile);
+router.post('/my/edtprofile/:userId', auth.authenticateToken, user.putEditProfile);
 
 
 
